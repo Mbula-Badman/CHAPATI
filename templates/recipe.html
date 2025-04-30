@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chapati Recipe</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <h1>How to Prepare Delicious Chapati</h1>
+
+    <img src="{{ url_for('static', filename='chapo.jpg') }}" alt="Chapati" id="chapati-img">
+
+    <div id="step-box">
+        <p id="step-text">{{ steps[0] }}</p>
+
+        <div id="buttons">
+            <button onclick="previousStep()">Previous</button>
+            <button onclick="nextStep()">Next</button>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2025 Chapati Lovers
+    </footer>
+
+    <script>
+        const steps = {{ steps|tojson }};
+        let currentStep = 0;
+
+        function showStep() {
+            document.getElementById('step-text').innerText = steps[currentStep];
+        }
+
+        function nextStep() {
+            if (currentStep < steps.length - 1) {
+                currentStep++;
+                showStep();
+            }
+        }
+
+        function previousStep() {
+            if (currentStep > 0) {
+                currentStep--;
+                showStep();
+            }
+        }
+    </script>
+
+</body>
+</html>
